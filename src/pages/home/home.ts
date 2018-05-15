@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
-import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic-native/barcode-scanner';
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
