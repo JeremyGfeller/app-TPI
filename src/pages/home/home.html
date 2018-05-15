@@ -1,9 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>
+      Cercle d'Yverdon
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  
+    <button ion-button full (click)="scanQR()">Lancer le scan</button>
+
+    <p>Nom du vin: {{name}}</p>
+    <p>Année: {{year}}</p>
+    <p>Nombre de bouteilles: <ion-input placeholder="Nombre de bouteilles"></ion-input></p>
+    <p>Fournisseurs: <ion-input></ion-input></p>
+
+    <button ion-button full>Entrée</button>
+    <button ion-button full>Sortie</button>
 </ion-content>

@@ -33,7 +33,7 @@ export class AboutPage {
     /* Scan the QR-Code and the data appear */
     this.bcs.scan(options)
     .then(res => {
-        this.users = this.httpClient.get(this.url + "api.php?id=" + res.text);
+        this.users = this.httpClient.get(this.url + "stock.php?id=" + res.text);
         this.users
         .subscribe(data => {
           this.id_wine = data.id_wine;
