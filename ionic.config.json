@@ -1,0 +1,8 @@
+{
+  "name": "wine",
+  "app_id": "2ef8fd81",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
