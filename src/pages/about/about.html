@@ -9,9 +9,12 @@
 <ion-content padding>
     <button ion-button full (click)="scanBarcode()">Lancer le scan</button>
 
-    <p>ID user: {{id_users}}</p>
-    <p>Prénom: {{first_name}}</p>
-    <p>Nom: {{last_name}}</p>
+    <p>Nom du vin: {{id_users}}</p>
+    <p>Année: {{first_name}}</p>
+    <p>Stock: {{last_name}} bouteilles</p>
     <p>Login: {{login}}</p>
-    <p>Role: {{role}}</p>
+    
+    <p>Nouveau stock: <ion-input placeholder="Entrez le nouveau stock"></ion-input></p>
+        
+    <button ion-button full >Appliquer</button>
 </ion-content>
