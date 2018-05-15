@@ -7,13 +7,9 @@
 <ion-content padding>
   <button ion-button full (click)="scanBarcode()">Lancer le scan</button>
 
-  <ion-card *ngIf="id_users">
-    <ion-card-content>
-      <p>ID user: {{id_users}}</p>
-      <p>Prénom: {{first_name}}</p>
-      <p>Nom: {{last_name}}</p>
-      <p>Login: {{login}}</p>
-      <p>Role: {{role}}</p>
-    </ion-card-content>
-  </ion-card>
+  <p>ID user: {{id_users}}</p>
+  <p>Prénom: {{first_name}}</p>
+  <p>Nom: {{last_name}}</p>
+  <p>Login: {{login}}</p>
+  <p>Role: {{role}}</p>
 </ion-content>
