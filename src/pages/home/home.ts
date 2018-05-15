@@ -33,20 +33,20 @@ export class HomePage {
     // Push to master : git push ionic master
     /* Scan the QR-Code and the data appear */
     this.bcs.scan(options)
-        .then(res => {
-            this.users = this.httpClient.get(this.url + "api.php?id=" + res.text);
-            this.users
-            .subscribe(data => {
-                this.id_users = data.id_article;
-                this.first_name = data.quantity;
-                this.last_name = data.brand;
-                this.login = data.login;
-            })
+    .then(res => {
+        this.users = this.httpClient.get(this.url + "api.php?id=" + res.text);
+        this.users
+        .subscribe(data => {
+          this.id_users = data.id_article;
+          this.first_name = data.quantity;
+          this.last_name = data.brand;
+          this.login = data.login;
         })
-        .catch(err => {
-            this.toastCtrl.create({
-                message: err.message
-            }).present();
-        })
+    })
+    .catch(err => {
+        this.toastCtrl.create({
+          message: err.message
+        }).present();
+    })
   }
 }
