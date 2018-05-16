@@ -11,7 +11,7 @@ import { NetworkEngineProvider } from '../../providers/network-engine/network-en
 })
 export class AboutPage {
 
-  public inputVal: string;
+  public newQuantity: number;
   responseTxt: any;
 
   result: BarcodeScanResult;
@@ -26,9 +26,9 @@ export class AboutPage {
 
   }
   
-  updateVal(id, numberWine){
+  updateTable(id, newQuantity){
 
-    this.network.updateTable(this.id_wine, this.inputVal).then(data => {
+    this.network.updateTable(id, newQuantity).then(data => {
       console.log("J'ai reçu : " + JSON.stringify(data));
       this.responseTxt = "" + JSON.stringify(data);
     })

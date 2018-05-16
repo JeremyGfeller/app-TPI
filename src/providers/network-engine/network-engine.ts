@@ -14,11 +14,14 @@ export class NetworkEngineProvider {
     console.log('Hello NetworkEngineProvider Provider');
   }
 
-  updateTable(id, numberWine) : Promise<any>
+  updateTable(id, newQuantity) : Promise<any>
   {
-    let url : "https://cpnvproj1.ngrok.io/TPI/site/update.php";
-    let param = { id_wine: id, newQuantity: numberWine};
+    let url = "https://cpnvproj1.ngrok.io/TPI/site/update.php";
+    console.log(url);
+    let param = { id_wine: id, newQuantity: newQuantity};
+    console.log(param);
     let request = this.http.post(url, param);
+    console.log(request);
     return request.toPromise();
   }
   
