@@ -3,6 +3,8 @@ import { NavController, ToastController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic-native/barcode-scanner';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { HTTP } from '@ionic-native/http';
+
 
 @Component({
   selector: 'page-home',
@@ -10,16 +12,27 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HomePage {
 
+  public inputVal: string;
+
+  resultat: any = [];
+
   result: BarcodeScanResult;
   id_wine: number;
   name: Text;
   quantity: number;
   year: number;
   users: Observable<any>;
+  data: Observable<any>;
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient) {
 
+  }
+
+  showVall(){
+    //this.data = this.httpClient.get(this.url + "addRemove.php?id=1&newQuantity=" + this.inputVal);
+    alert("inputValue " + this.inputVal);
+    alert("id_wine " + this.id_wine);
   }
 
   scanQR()
