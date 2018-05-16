@@ -10,6 +10,7 @@
     <button ion-button full (click)="scanQR()">Lancer le scan</button>
 
     <p>Nom du vin: {{name}}</p>
+    <input type='hidden' value="{{name}}" [(ngModel)] = "name">
     <p>Année: {{year}}</p>
     <p>Nombre de bouteilles: <ion-input placeholder="Nombre de bouteilles"></ion-input></p>
     <p>Fournisseurs: <ion-input></ion-input></p>
@@ -21,6 +22,7 @@
       </ion-item>
     </ion-list>
 
-    <button ion-button full (click) = "showVall()">Entrée</button>
+    {{responseTxt}}
+    <button ion-button full (click) = "updateVal(name, inputVal)">Entrée</button>
     <button ion-button full>Sortie</button>
 </ion-content>
