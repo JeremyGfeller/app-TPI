@@ -15,13 +15,15 @@
     
     <p>Nouveau stock: <ion-input placeholder="Entrez le nouveau stock"></ion-input></p>
 
-    <ion-list>
-      <ion-item>
-        <ion-label floating>Nombre de bouteilles</ion-label>
-        <ion-input type="text" [(ngModel)] = "inputVal"></ion-input>
-      </ion-item>
-    </ion-list>
-        
-    {{inputVal}}
-    <button ion-button full (click) = "updateVal(1, inputVal)">Appliquer</button>
+    <form method="POST">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Nombre de bouteilles</ion-label>
+          <ion-input type="text" [(ngModel)] = "inputVal"></ion-input>
+        </ion-item>
+      </ion-list>
+          
+      {{inputVal}}
+      <button ion-button full (click) = "updateVal(1, inputVal)">Appliquer</button>
+    </form>
 </ion-content>
