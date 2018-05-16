@@ -14,14 +14,7 @@
     <p>Nombre de bouteilles: <ion-input placeholder="Nombre de bouteilles"></ion-input></p>
     <p>Fournisseurs: <ion-input></ion-input></p>
 
-    <ion-list>
-      <ion-item>
-        <ion-label floating>Nombre de bouteilles</ion-label>
-        <ion-input type="text" [(ngModel)] = "inputVal"></ion-input>
-      </ion-item>
-    </ion-list>
-
     {{responseTxt}}
-    <button ion-button full (click) = "updateVal(1, inputVal)">Entrée</button>
+    <button ion-button full>Entrée</button>
     <button ion-button full>Sortie</button>
 </ion-content>
