@@ -21,7 +21,7 @@ export class AboutPage {
   newQuantity: number;
   quantity: number;
   year: number;
-  users: Observable<any>;
+  resultScan: Observable<any>;
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, public network: NetworkEngineProvider) {
@@ -39,7 +39,6 @@ export class AboutPage {
     })
   }
 
-
   scanBarcode()
   {
     const options: BarcodeScannerOptions = {
@@ -51,8 +50,8 @@ export class AboutPage {
     /* Scan the QR-Code and the data appear */
     this.bcs.scan(options)
     .then(res => {
-        this.users = this.httpClient.get(this.url + "stock.php?id=" + res.text);
-        this.users
+        this.resultScan = this.httpClient.get(this.url + "stock.php?id=" + res.text);
+        this.resultScan
         .subscribe(data => {
           this.id_wine = data.id_wine;
           this.name = data.name;

@@ -9,12 +9,25 @@
 <ion-content padding>
     <button ion-button full (click)="scanQR()">Lancer le scan</button>
 
-    <p>Nom du vin: {{name}}</p>
-    <p>Année: {{year}}</p>
-    <p>Nombre de bouteilles: <ion-input placeholder="Nombre de bouteilles"></ion-input></p>
-    <p>Fournisseurs: <ion-input></ion-input></p>
+    <ion-list>
+      <p>Nom du vin: {{name}}</p>
+      <p>Année: {{year}}</p>
+      <ion-item>
+        <ion-label>Nombre de bouteilles:</ion-label>
+        <ion-input type="text" [(ngModel)] = "Quantity"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fournisseurs:</ion-label>
+        <ion-input type="text" [(ngModel)] = "fournisseur"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Prénom:</ion-label>
+        <ion-input type="text" [(ngModel)] = "first_name"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button full (click) = "in(id_wine, Quantity, fournisseur, first_name)">Entrée</button>
+    <button ion-button full>Sortie</button>
 
     {{responseTxt}}
-    <button ion-button full>Entrée</button>
-    <button ion-button full>Sortie</button>
 </ion-content>

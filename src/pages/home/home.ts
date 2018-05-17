@@ -12,18 +12,48 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage {
 
+  responseTxt: any;
+  Quantity: number;
+  fournisseur: string;
+  first_name: string;
+
   result: BarcodeScanResult;
   id_wine: number;
   name: Text;
   quantity: number;
   year: number;
-  users: Observable<any>;
+  resultScan: Observable<any>;
   data: Observable<any>;
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
 
   }
+
+  in(id_wine, Quantity, fournisseur, first_name)
+  {
+    let postData = new FormData()
+    postData.append('idWine', id_wine)
+    postData.append('quantity', Quantity)
+    postData.append('provider', fournisseur)
+    postData.append('pseudo', first_name)
+    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/in.php', postData)
+    this.data.subscribe( data => {
+      this.responseTxt = data
+      //this.responseTxt = "Le nouveau stock a été mis à jour !";
+    })
+  }
+
+  /*updateTable(id, newQuantity) {
+    let postData = new FormData()
+    postData.append('wineid', id)
+    postData.append('quantity', newQuantity)
+    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postData)
+    this.data.subscribe( data => {
+      //this.responseTxt = data
+      this.responseTxt = "Le nouveau stock a été mis à jour !";
+    })
+  }*/
 
   scanQR()
   {
@@ -36,8 +66,8 @@ export class HomePage {
     /* Scan the QR-Code and the data appear */
     this.bcs.scan(options)
     .then(res => {
-        this.users = this.httpClient.get(this.url + "addRemove.php?id=" + res.text);
-        this.users
+        this.resultScan = this.httpClient.get(this.url + "stock.php?id=" + res.text);
+        this.resultScan
         .subscribe(data => {
           this.id_wine = data.id_wine;
           this.name = data.name;
