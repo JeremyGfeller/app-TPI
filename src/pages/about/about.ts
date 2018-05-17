@@ -34,7 +34,8 @@ export class AboutPage {
     postData.append('quantity', newQuantity)
     this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postData)
     this.data.subscribe( data => {
-      this.responseTxt = data
+      //this.responseTxt = data
+      this.responseTxt = "Le nouveau stock a été mis à jour !";
     })
   }
 
