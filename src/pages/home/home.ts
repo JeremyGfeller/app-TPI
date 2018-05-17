@@ -44,17 +44,6 @@ export class HomePage {
     })
   }
 
-  /*updateTable(id, newQuantity) {
-    let postData = new FormData()
-    postData.append('wineid', id)
-    postData.append('quantity', newQuantity)
-    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postData)
-    this.data.subscribe( data => {
-      //this.responseTxt = data
-      this.responseTxt = "Le nouveau stock a été mis à jour !";
-    })
-  }*/
-
   scanQR()
   {
     const options: BarcodeScannerOptions = {
