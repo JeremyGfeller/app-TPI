@@ -44,6 +44,19 @@ export class HomePage {
     })
   }
 
+  out(id_wine, Quantity, first_name)
+  {
+    let postData = new FormData()
+    postData.append('idWine', id_wine)
+    postData.append('quantity', Quantity)
+    postData.append('pseudo', first_name)
+    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/in.php', postData)
+    this.data.subscribe( data => {
+      //this.responseTxt = data
+      this.response = "Les bouteilles se sont ajoutées !";
+    })
+  }
+
   scanQR()
   {
     const options: BarcodeScannerOptions = {
