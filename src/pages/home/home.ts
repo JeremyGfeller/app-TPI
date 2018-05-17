@@ -54,7 +54,7 @@ export class HomePage {
     this.data.subscribe( data => {
       //this.responseTxt = data
       this.response = "Les bouteilles ont été retirée(s) !";
-    })
+    })    
   }
 
   scanQR()
