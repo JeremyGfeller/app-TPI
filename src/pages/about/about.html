@@ -9,30 +9,13 @@
 <ion-content padding>
     <button ion-button full (click)="scanBarcode()">Lancer le scan</button>
 
-    <ion-list>
-      <ion-item>
-        <ion-label>Nom du vin:</ion-label>
-        <ion-input>{{name}}</ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Année:</ion-label>
-        <ion-input>{{year}}</ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>bouteilles en stock</ion-label>
-        <ion-input>{{quantity}}</ion-input>
-      </ion-item>
-    </ion-list>
-    
-    <!--p>Nom du vin: {{name}}</p> 
+    <p>Nom du vin: {{name}}</p> 
     <p>Année: {{year}}</p>
-    <p>Stock: {{quantity}} bouteilles</p-->
+    <p>Stock: {{quantity}} bouteilles</p>
 
     <ion-list>
       <ion-item>
-        <ion-label floating>Nouveau stock</ion-label>
+        <ion-label>Nouveau stock:</ion-label>
         <ion-input type="text" [(ngModel)] = "newQuantity"></ion-input>
       </ion-item>
     </ion-list>
