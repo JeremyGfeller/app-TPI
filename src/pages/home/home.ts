@@ -12,7 +12,7 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage {
 
-  responseTxt: any;
+  response: any;
   Quantity: number;
   fournisseur: string;
   first_name: string;
@@ -39,8 +39,8 @@ export class HomePage {
     postData.append('pseudo', first_name)
     this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/in.php', postData)
     this.data.subscribe( data => {
-      this.responseTxt = data
-      //this.responseTxt = "Le nouveau stock a été mis à jour !";
+      //this.responseTxt = data
+      this.response = "Les bouteilles se sont ajoutées !";
     })
   }
 
