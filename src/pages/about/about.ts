@@ -13,6 +13,7 @@ export class AboutPage {
 
   public newQuantity: number;
   responseTxt: any;
+  data: Observable<any>;
 
   result: BarcodeScanResult;
   id_wine: number;
@@ -26,23 +27,14 @@ export class AboutPage {
 
   }
   
-  updateTable(id, newQuantity){
-
-    this.network.updateTable(id, newQuantity).then(data => {
-      console.log("J'ai reçu : " + JSON.stringify(data));
-      this.responseTxt = "" + JSON.stringify(data);
+  updateTable(id, newQuantity) {
+    let postData = new FormData()
+    postData.append('wineid',id)
+    postData.append('quantity',newQuantity)
+    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postData)
+    this.data.subscribe( data => {
+      this.responseTxt = data
     })
-
-    //this.data = this.httpClient.get(this.url + "addRemove.php?id=1&newQuantity=" + this.inputVal);
-    //alert("inputValue " + this.inputVal);
-    //alert("id_wine " + this.id_wine);
-
-    /*let alert = this.alertCtrl.create({
-      title: "id_wine " + this.id_wine,
-      subTitle: "inputValue " + this.inputVal,
-      buttons: ['Dismiss']
-    });
-    alert.present();*/
   }
 
   scanBarcode()
