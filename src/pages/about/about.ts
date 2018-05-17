@@ -11,13 +11,14 @@ import { NetworkEngineProvider } from '../../providers/network-engine/network-en
 })
 export class AboutPage {
 
-  public newQuantity: number;
+  //public newQuantity: number;
   responseTxt: any;
   data: Observable<any>;
 
   result: BarcodeScanResult;
   id_wine: number;
   name: Text;
+  newQuantity: number;
   quantity: number;
   year: number;
   users: Observable<any>;
@@ -29,13 +30,14 @@ export class AboutPage {
   
   updateTable(id, newQuantity) {
     let postData = new FormData()
-    postData.append('wineid',id)
-    postData.append('quantity',newQuantity)
+    postData.append('wineid', id)
+    postData.append('quantity', newQuantity)
     this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postData)
     this.data.subscribe( data => {
       this.responseTxt = data
     })
   }
+
 
   scanBarcode()
   {
