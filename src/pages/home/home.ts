@@ -40,7 +40,7 @@ export class HomePage {
     this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/in.php', postData)
     this.data.subscribe( data => {
       //this.responseTxt = data
-      this.response = "Les bouteilles ont été ajoutée(s) !";
+      this.response = "Les bouteilles ont été ajoutées !";
     })
   }
 
@@ -52,8 +52,8 @@ export class HomePage {
     postData.append('pseudo', first_name)
     this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
     this.data.subscribe( data => {
-      //this.responseTxt = data
-      this.response = "Les bouteilles ont été retirée(s) !";
+      //this.response = data
+      this.response = "Les bouteilles ont été retirées !";
     })    
   }
 
