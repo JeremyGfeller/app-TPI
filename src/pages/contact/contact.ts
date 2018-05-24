@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'page-contact',
@@ -15,8 +17,13 @@ export class ContactPage {
   responseTxt3: any;
   responseTxt4: any;
   responseTxt5: any;
+  url: string = "https://cpnvproj1.ngrok.io/TPI/site/outDB.php";
+  id_typewine: number;
+  typewine: Text;
+  result : Observable<any>;
 
-  constructor(public navCtrl: NavController, private sqlite: SQLite) {
+
+  constructor(public navCtrl: NavController, private sqlite: SQLite, private httpClient: HttpClient) {
 
   }
 
@@ -30,10 +37,11 @@ export class ContactPage {
           console.log('BD créée !');
           this.db = db;
           this.createTables();
+          this.insertValues();
       })
       .catch(e => console.log(e));
   }
-
+  
   private createTables(): void{
     this.db.executeSql('CREATE TABLE IF NOT EXISTS `typewine` ( `id_typeWine` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `typeWine` TEXT )', {})
     .then(() => {
@@ -67,6 +75,21 @@ export class ContactPage {
       })
       .catch(e => console.log(e));
     })
+    .catch(e => console.log(e));
+  }
+
+  // INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (2,NULL);
+  private insertValues(): void {
+    this.result = this.httpClient.get(this.url);
+    this.result
+      .subscribe(data => {
+        for(let i=0; i < data.length; i++){
+          this.id_typewine = data[i].id_typeWine;
+          this.typewine = data[i].typeWine;
+        }
+      })
+    this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (\'' + this.id_typewine + '\, \'' + this.typewine + '\')', {})
+    .then(() => console.log('Executed SQL'))
     .catch(e => console.log(e));
   }
 }
