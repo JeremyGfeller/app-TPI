@@ -11,7 +11,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ContactPage {
 
-  private db: SQLiteObject;
+  typeWineTable : string[] = [];
+  public db: SQLiteObject;
   responseTxt: any;
   responseTxt2: any;
   responseTxt3: any;
@@ -27,8 +28,7 @@ export class ContactPage {
 
   }
 
-  sync()
-  {
+  sync() {
     this.sqlite.create({
       name: 'caveWine.db',
       location: 'default'
@@ -91,5 +91,25 @@ export class ContactPage {
     this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (\'' + this.id_typewine + '\, \'' + this.typewine + '\')', {})
     .then(() => console.log('Executed SQL'))
     .catch(e => console.log(e));
+  }
+
+  public retrieveTypeWine(): void {
+    this.db.executeSql('SELECT typeWine from `typeWine`', {})
+    .then(data => {
+
+      if(data == null){
+        return;
+      }
+
+      if(data.rows) {
+        if(data.rows.length > 0)
+        {
+          for(var i = 0; i < data.rows.length; i++)
+          {
+            this.typeWineTable.push(data.rows.item(i).name);
+          }
+        }
+      }
+    });
   }
 }

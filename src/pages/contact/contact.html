@@ -16,7 +16,15 @@
   </ion-list>
   
   <button ion-button full (click) = "sync()">Synchroniser</button>
-  
+    
   {{id_typewine}}
   {{typewine}}
+
+  <ion-list>
+    <ion-item *ngFor='let data of typeWineTable'>
+      <ion-label fixed>{{typeWineTable}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <button ion-button full (click) = "retrieveTypeWine()">Get data</button>
+
 </ion-content>
