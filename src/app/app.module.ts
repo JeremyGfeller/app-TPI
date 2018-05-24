@@ -13,6 +13,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NetworkEngineProvider } from '../providers/network-engine/network-engine';
+import { SQLite } from '@ionic-native/sqlite';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NetworkEngineProvider } from '../providers/network-engine/network-engin
     StatusBar,
     BarcodeScanner,
     SplashScreen,
+    SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NetworkEngineProvider
   ]
