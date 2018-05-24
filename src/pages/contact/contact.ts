@@ -86,11 +86,11 @@ export class ContactPage {
         for(let i=0; i < data.length; i++){
           this.id_typewine = data[i].id_typeWine;
           this.typewine = data[i].typeWine;
+          this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (\'' + this.id_typewine + '\, \'' + this.typewine + '\')', {})
+          .then(() => console.log('Executed SQL'))
+          .catch(e => console.log(e));
         }
       })
-    this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (\'' + this.id_typewine + '\, \'' + this.typewine + '\')', {})
-    .then(() => console.log('Executed SQL'))
-    .catch(e => console.log(e));
   }
 
   public retrieveTypeWine(): void {
