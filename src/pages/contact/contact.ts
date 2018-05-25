@@ -18,6 +18,7 @@ export class ContactPage {
   responseTxt3: any;
   responseTxt4: any;
   responseTxt5: any;
+  responseTxt6: any;
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/outDB.php";
   id_typewine: number;
   typewine: Text;
@@ -87,29 +88,11 @@ export class ContactPage {
           this.id_typewine = data[i].id_typeWine;
           this.typewine = data[i].typeWine;
           this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (\'' + this.id_typewine + '\, \'' + this.typewine + '\')', {})
-          .then(() => console.log('Executed SQL'))
+          .then(() => {
+            this.responseTxt6 = this.db.executeSql('SELECT * from `typewine`', {});
+          })
           .catch(e => console.log(e));
         }
       })
-  }
-
-  public retrieveTypeWine(): void {
-    this.db.executeSql('SELECT typeWine from `typeWine`', {})
-    .then(data => {
-
-      if(data == null){
-        return;
-      }
-
-      if(data.rows) {
-        if(data.rows.length > 0)
-        {
-          for(var i = 0; i < data.rows.length; i++)
-          {
-            this.typeWineTable.push(data.rows.item(i).name);
-          }
-        }
-      }
-    });
   }
 }
