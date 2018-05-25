@@ -102,14 +102,13 @@ export class ContactPage {
       .subscribe(data => {
         for(let i=0; i < data.length; i++)
         {
-          this.id = i;
           this.id_typewine = data[i].id_typeWine;
           this.typewine = data[i].typeWine;
           this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (' + this.id_typewine + ',' + this.typewine + ')', {});
         }
 
         this.db.executeSql('SELECT count(*) as nb from `typewine`)', {}).then(function(data) {
-          this.responseTxt6 = data.rows.item(1).nb;
+          this.responseTxt6 = JSON.stringify(data)
         }) 
       })
   }
