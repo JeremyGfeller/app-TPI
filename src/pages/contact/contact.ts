@@ -108,7 +108,9 @@ export class ContactPage {
           this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (' + this.id_typewine + ',' + this.typewine + ')', {});
         }
 
-        this.responseTxt6 = this.db.executeSql('SELECT count(*) from `typewine`)', {});
+        this.db.executeSql('SELECT count(*) as nb from `typewine`)', {}).then(function(data) {
+          this.responseTxt6 = data.rows.item(1).nb;
+        }) 
       })
   }
 }
