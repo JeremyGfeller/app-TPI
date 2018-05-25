@@ -22,6 +22,7 @@ export class ContactPage {
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/outDB.php";
   id_typewine: number;
   typewine: Text;
+  id: number;
   result : Observable<any>;
 
 
@@ -34,11 +35,13 @@ export class ContactPage {
     this.result = this.httpClient.get(this.url);
     this.result
       .subscribe(data => {
-      for(let i=0; i < data.length; i++)
+        this.id_typewine = data[2].id_typeWine;
+        this.typewine = data[2].typeWine;
+      /*for(let i=0; i < data.length; i++)
       {
         this.id_typewine = data[i].id_typeWine;
         this.typewine = data[i].typeWine;
-      } 
+      } */
     });
   }
 
@@ -97,15 +100,15 @@ export class ContactPage {
     this.result = this.httpClient.get(this.url);
     this.result
       .subscribe(data => {
-        for(let i=0; i < data.length; i++){
+        for(let i=0; i < data.length; i++)
+        {
+          this.id = i;
           this.id_typewine = data[i].id_typeWine;
           this.typewine = data[i].typeWine;
-          this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (' + this.id_typewine + ',' + this.typewine + ')', {})
-          .then(() => {
-            this.responseTxt6 = this.db.executeSql('SELECT * from `typewine`', {});
-          })
-          .catch(e => console.log(e));
+          this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (' + this.id_typewine + ',' + this.typewine + ')', {});
         }
+
+        this.responseTxt6 = this.db.executeSql('SELECT * from `typewine`)', {});
       })
   }
 }
