@@ -29,6 +29,19 @@ export class ContactPage {
 
   }
 
+  test()
+  {
+    this.result = this.httpClient.get(this.url);
+    this.result
+      .subscribe(data => {
+      for(let i=0; i < data.length; i++)
+      {
+        this.id_typewine = data[i].id_typeWine;
+        this.typewine = data[i].typeWine;
+      } 
+    });
+  }
+
   sync() {
     this.sqlite.create({
       name: 'caveWine.db',
@@ -87,7 +100,7 @@ export class ContactPage {
         for(let i=0; i < data.length; i++){
           this.id_typewine = data[i].id_typeWine;
           this.typewine = data[i].typeWine;
-          this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (?, ?)', [this.id_typewine, this,this.typewine])
+          this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (?, ?)', [this.id_typewine, this.typewine])
           .then(() => {
             this.responseTxt6 = this.db.executeSql('SELECT * from `typewine`', {});
           })
