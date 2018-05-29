@@ -16,10 +16,12 @@
   </ion-list>
   
   <button ion-button full (click) = "sync()">Synchroniser</button>
-  <button ion-button full (click) = "test()">test</button>
-  {{id_typewine}}
-  {{typewine}}
-  
-  {{responseTxt}}
 
+  <ion-list>
+    <ion-item *ngFor="let allWine of allWines">
+      {{allWine.id_vintage}}{{allWine.name}}
+    </ion-item>
+  </ion-list>
 </ion-content>
+{{responseTxt}}
+<!--id_vintage""id_wine""name":"provider""year""qr_code""quantity""price""date-->

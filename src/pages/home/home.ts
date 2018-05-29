@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, Platform } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic-native/barcode-scanner';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { AlertController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -12,10 +13,14 @@ import { AlertController } from 'ionic-angular';
 })
 export class HomePage {
 
+  public allWines = [];
+  public movements = [];
+  resultSync : Observable<any>;
   response: any;
+  response2: string [] = [];
   Quantity: number;
   fournisseur: string;
-  first_name: string;
+  login: string;
 
   result: BarcodeScanResult;
   id_wine: number;
@@ -26,8 +31,19 @@ export class HomePage {
   data: Observable<any>;
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
 
+  }
+
+  sync() {
+    this.platform.ready().then(() => {
+      this.resultSync = this.httpClient.get(this.url + "stock.php");
+      this.resultSync
+      .subscribe(data => {
+        this.allWines = data;
+      })
+      //this.storage.set('allWines', this.allWines);
+    })
   }
 
   in(id_wine, Quantity, fournisseur, first_name)
@@ -44,9 +60,12 @@ export class HomePage {
     })
   }
 
-  out(id_wine, Quantity, first_name)
+  out(id_wine, Quantity, login)
   {
-    let postData = new FormData()
+    this.movements.push({'id_wine': id_wine, 'movement_out': Quantity, 'login': login});
+    this.storage.set('movements', this.movements);
+
+    /*let postData = new FormData()
     postData.append('idWine', id_wine)
     postData.append('quantity', Quantity)
     postData.append('pseudo', first_name)
@@ -54,7 +73,7 @@ export class HomePage {
     this.data.subscribe( data => {
       //this.response = data
       this.response = "Les bouteilles ont été retirées !";
-    })    
+    })*/ 
   }
 
   scanQR()

@@ -13,7 +13,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NetworkEngineProvider } from '../providers/network-engine/network-engine';
-import { SQLite } from '@ionic-native/sqlite';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { SQLite } from '@ionic-native/sqlite';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +41,6 @@ import { SQLite } from '@ionic-native/sqlite';
     StatusBar,
     BarcodeScanner,
     SplashScreen,
-    SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NetworkEngineProvider
   ]

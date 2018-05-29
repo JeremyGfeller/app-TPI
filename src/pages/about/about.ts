@@ -3,6 +3,7 @@ import { NavController, ToastController } from 'ionic-angular';
 import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic-native/barcode-scanner';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 import { NetworkEngineProvider } from '../../providers/network-engine/network-engine'
 
 @Component({
@@ -24,8 +25,8 @@ export class AboutPage {
   resultScan: Observable<any>;
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, public network: NetworkEngineProvider) {
-
+  constructor(public navCtrl: NavController, private storage: Storage, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, public network: NetworkEngineProvider) {
+    
   }
   
   updateTable(id, newQuantity) {

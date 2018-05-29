@@ -22,12 +22,24 @@
       </ion-item>
       <ion-item>
         <ion-label>Login:</ion-label>
-        <ion-input type="text" [(ngModel)] = "first_name"></ion-input>
+        <ion-input type="text" [(ngModel)] = "login"></ion-input>
       </ion-item>
     </ion-list>
 
     <button ion-button full (click) = "in(id_wine, Quantity, fournisseur, first_name)">Entrée</button>
-    <button ion-button full (click) = "out(id_wine, Quantity, first_name)">Sortie</button>
+    <button ion-button full (click) = "out(1, Quantity, login)">Sortie</button>
+    {{response}}
+    <br>
+    <ion-list>
+      <ion-item *ngFor="let movement of movements">
+        {{movement.id_wine}}{{movement.movement_out}}{{movement.login}}
+      </ion-item>
+    </ion-list><br>
 
-    <br>{{response}}
+    <button ion-button full (click) = "sync()">Synchroniser</button><br>
+    <ion-list>
+      <ion-item *ngFor="let allWine of allWines">
+        {{allWine.id_vintage}}{{allWine.name}}
+      </ion-item>
+    </ion-list>
 </ion-content>
