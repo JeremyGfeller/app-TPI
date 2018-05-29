@@ -107,10 +107,9 @@ export class ContactPage {
         {
           this.id_typewine = data[i].id_typeWine;
           this.typewine = data[i].typeWine;
-          this.db.executeSql('INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (' + this.id_typewine + ',' + this.typewine + ')', {}).then(() => {
-            this.db.executeSql('SELECT count(*) as nb from `typewine`)', {}).then((data) => {
-              this.responseTxt += JSON.stringify(data)
-            }) 
+          let query = 'INSERT INTO `typewine`(`id_typeWine`,`typeWine`) VALUES (' + this.id_typewine + ',' + this.typewine + ')';
+          this.db.executeSql(query, {}).then(() => {
+            this.responseTxt += query
           })
         }
       })
