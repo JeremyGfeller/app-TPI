@@ -102,6 +102,7 @@ export class ContactPage {
     this.result = this.httpClient.get(this.url);
     this.result
       .subscribe(data => {
+        this.responseTxt += JSON.stringify(data)
         for(let i=0; i < data.length; i++)
         {
           this.id_typewine = data[i].id_typeWine;
