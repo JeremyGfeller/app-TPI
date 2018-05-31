@@ -93,7 +93,7 @@ export class HomePage {
       /* Scan the QR-Code and the data appear */
       this.bcs.scan(options)
       .then(res => {
-          this.allWines.forEach((wine) => {
+          this.allWines.forEach((wine, allWines) => {
           if(wine.id_wine == res)
           {
             this.name = wine.name;
