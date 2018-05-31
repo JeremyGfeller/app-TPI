@@ -94,13 +94,13 @@ export class HomePage {
       this.bcs.scan(options)
       .then(res => {
           this.allWines.forEach((wine) => {
-            this.response += wine.id_wine;
-            this.response += wine.name;
-          /*if(wine.id_wine == res)
-          {
-            this.name = wine.name;
-            this.year = wine.year;
-          }*/
+            /*this.response += wine.id_wine;
+            this.response += wine.name;*/
+            if(wine.id_wine == res)
+            {
+              this.name = wine.name;
+              this.year = wine.year;
+            }
         })
       })
       .catch(err => {
