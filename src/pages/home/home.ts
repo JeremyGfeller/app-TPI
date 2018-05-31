@@ -32,17 +32,28 @@ export class HomePage {
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
-
+      storage.get('allWines').then((data) => {
+        this.allWines = data;
+      })
   }
 
   sync() {
     this.platform.ready().then(() => {
+      /*let postData = new FormData()
+      postData.append('idWine', id_wine)
+      postData.append('quantity', Quantity)
+      postData.append('pseudo', first_name)
+      this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
+      this.data.subscribe( data => {
+        //this.response = data
+        this.response = "Les bouteilles ont été retirées !";
+      })*/
       this.resultSync = this.httpClient.get(this.url + "stock.php");
       this.resultSync
       .subscribe(data => {
         this.allWines = data;
+        this.storage.set('allWines', this.allWines);
       })
-      //this.storage.set('allWines', this.allWines);
     })
   }
 
@@ -63,17 +74,7 @@ export class HomePage {
   out(id_wine, Quantity, login)
   {
     this.movements.push({'id_wine': id_wine, 'movement_out': Quantity, 'login': login});
-    this.storage.set('movements', this.movements);
-
-    /*let postData = new FormData()
-    postData.append('idWine', id_wine)
-    postData.append('quantity', Quantity)
-    postData.append('pseudo', first_name)
-    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
-    this.data.subscribe( data => {
-      //this.response = data
-      this.response = "Les bouteilles ont été retirées !";
-    })*/ 
+    this.storage.set('movements', this.movements); 
   }
 
   scanQR()
@@ -87,14 +88,10 @@ export class HomePage {
     /* Scan the QR-Code and the data appear */
     this.bcs.scan(options)
     .then(res => {
-        this.resultScan = this.httpClient.get(this.url + "stock.php?id=" + res.text);
-        this.resultScan
-        .subscribe(data => {
-          this.id_wine = data.id_wine;
-          this.name = data.name;
-          this.year = data.year;
-          this.quantity = data.quantity;
-        })
+        this.allWines.forEach((wine) => {
+        //if(wine == res)
+        this.response += wine;
+      })
     })
     .catch(err => {
         this.toastCtrl.create({
