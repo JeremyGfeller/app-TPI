@@ -38,6 +38,10 @@ export class HomePage {
 
       storage.get('movements').then((data) => {
         this.movements = data;
+        if(data == null)
+        {
+          this.movements = [];
+        }
       })
   }
 
@@ -111,5 +115,5 @@ export class HomePage {
           }).present();
       })
     })
-  }
+  }  
 }
