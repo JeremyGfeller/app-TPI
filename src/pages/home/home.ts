@@ -94,8 +94,11 @@ export class HomePage {
       this.bcs.scan(options)
       .then(res => {
           this.allWines.forEach((wine) => {
-          //if(wine == res)
-          this.response += wine;
+          if(wine.id_wine == res)
+          {
+            this.name = wine.name;
+            this.year = wine.year;
+          }
         })
       })
       .catch(err => {
