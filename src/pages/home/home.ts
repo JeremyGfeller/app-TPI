@@ -35,6 +35,10 @@ export class HomePage {
       storage.get('allWines').then((data) => {
         this.allWines = data;
       })
+
+      storage.get('movements').then((data) => {
+        this.movements = data;
+      })
   }
 
   sync() {
@@ -79,24 +83,26 @@ export class HomePage {
 
   scanQR()
   {
-    const options: BarcodeScannerOptions = {
-      prompt: 'Pointez votre caméra vers un code barre',
-      torchOn: false
-    };
+    this.platform.ready().then(() => {
+      const options: BarcodeScannerOptions = {
+        prompt: 'Pointez votre caméra vers un code barre',
+        torchOn: false
+      };
 
-    // Push to master : git push ionic master
-    /* Scan the QR-Code and the data appear */
-    this.bcs.scan(options)
-    .then(res => {
-        this.allWines.forEach((wine) => {
-        //if(wine == res)
-        this.response += wine;
+      // Push to master : git push ionic master
+      /* Scan the QR-Code and the data appear */
+      this.bcs.scan(options)
+      .then(res => {
+          this.allWines.forEach((wine) => {
+          //if(wine == res)
+          this.response += wine;
+        })
       })
-    })
-    .catch(err => {
-        this.toastCtrl.create({
-          message: err.message
-        }).present();
+      .catch(err => {
+          this.toastCtrl.create({
+            message: err.message
+          }).present();
+      })
     })
   }
 }
