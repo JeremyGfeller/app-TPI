@@ -95,6 +95,7 @@ export class HomePage {
       .then(res => {
           this.allWines.forEach((wine) => {
             this.response += wine.id_wine;
+            this.response += wine.name;
           /*if(wine.id_wine == res)
           {
             this.name = wine.name;
