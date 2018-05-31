@@ -47,7 +47,6 @@ export class HomePage {
     postData.append('movements', JSON.stringify(this.movements))
     this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
     this.data.subscribe( data => {
-      //this.response = data
       if(data == 'ok')
       {
         this.toastCtrl.create({
@@ -98,6 +97,7 @@ export class HomePage {
           this.allWines.forEach((wine) => {
             if(wine.id_wine == res.text)
             {
+              this.id_wine = wine.id_wine;
               this.name = wine.name;
               this.year = wine.year;
             }
