@@ -13,6 +13,7 @@ import { NetworkEngineProvider } from '../../providers/network-engine/network-en
 export class AboutPage {
 
   public allWines = [];
+  public update = [];
   responseTxt: any;
   data: Observable<any>;
   resultSync : Observable<any>;
@@ -27,58 +28,45 @@ export class AboutPage {
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, public network: NetworkEngineProvider) {
+    this.storage.remove('update');
     storage.get('allWines').then((data) => {
       this.allWines = data;
+    })
+
+    storage.get('update').then((data) => {
+      this.update = data;
+      if(data == null)
+      {
+        this.update = [] = [];
+      }
     })
   }
   
   updateTable(id, newQuantity) {
-    let postData = new FormData()
-    postData.append('wineid', id)
-    postData.append('quantity', newQuantity)
-    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postData)
-    this.data.subscribe( data => {
-      //this.responseTxt = data
-      this.responseTxt = "Le nouveau stock a été mis à jour !";
-    })
+    this.update.push({'id_wine': id, 'newQuantity': newQuantity});
+    this.storage.set('update', this.update); 
   }
 
   sync()
   {
+    let postDataOut = new FormData()
+    postDataOut.append('update', JSON.stringify(this.update))
+    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postDataOut)
+    this.data.subscribe( data => {
+      if(data == 'ok')
+      {
+        this.storage.remove('update');
+        this.toastCtrl.create({
+          message: 'syncro ok',
+          duration: 3000
+        }).present();
+      }
+    })
     this.resultSync = this.httpClient.get(this.url + "stock.php");
     this.resultSync
     .subscribe(data => {
       this.allWines = data;
       this.storage.set('allWines', this.allWines);
-    })
-  }
-
-  scanQR()
-  {
-    this.platform.ready().then(() => {
-      const options: BarcodeScannerOptions = {
-        prompt: 'Pointez votre caméra vers un code barre',
-        torchOn: false
-      };
-
-      // Push to master : git push ionic master
-      /* Scan the QR-Code and the data appear */
-      this.bcs.scan(options)
-      .then(res => {
-          this.allWines.forEach((wine) => {
-            if(wine.id_wine == res.text)
-            {
-              this.name = wine.name;
-              this.year = wine.year;
-              this.quantity = wine.quantity;
-            }
-        })
-      })
-      .catch(err => {
-          this.toastCtrl.create({
-            message: err.message
-          }).present();
-      })
     })
   }
 
@@ -93,14 +81,15 @@ export class AboutPage {
     /* Scan the QR-Code and the data appear */
     this.bcs.scan(options)
     .then(res => {
-        this.resultScan = this.httpClient.get(this.url + "stock.php?id=" + res.text);
-        this.resultScan
-        .subscribe(data => {
-          this.id_wine = data.id_wine;
-          this.name = data.name;
-          this.year = data.year;
-          this.quantity = data.quantity;
-        })
+        this.allWines.forEach((wine) => {
+          if(wine.id_wine == res.text)
+          {
+            this.id_wine = wine.id_wine;
+            this.name = wine.name;
+            this.year = wine.year;
+            this.quantity = wine.quantity;
+          }
+      })
     })
     .catch(err => {
         this.toastCtrl.create({
