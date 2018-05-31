@@ -44,20 +44,20 @@ export class HomePage {
   sync() {
     //this.platform.ready().then(() => {
       
-      /*let postData = new FormData()
-      for(let i=0; i > this.movements.length; i++)
-      {
-        postData.append('idWine', this.movements[i].id_wine)
-        postData.append('quantity', this.movements[i].movement_out)
-        postData.append('pseudo', this.movements[i].login)
-        this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
-        this.data.subscribe( data => {
-          //this.response = data
-          this.storage.remove(data);
-          this.response = "Supprimée du movements !";
-        })
-      }*/
+      let postData = new FormData()
+      postData.append('movements', JSON.stringify(this.movements))
 
+      this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
+      this.data.subscribe( data => {
+        //this.response = data
+        if(data == 'ok')
+        {
+          this.toastCtrl.create({
+            message: 'syncro ok'
+          }).present();
+        }
+      })
+      
       /*postData.append('idWine', id_wine)
       postData.append('quantity', Quantity)
       postData.append('pseudo', first_name)
@@ -108,12 +108,12 @@ export class HomePage {
       /* Scan the QR-Code and the data appear */
       this.bcs.scan(options)
       .then(res => {
-        this.response = res;
+        this.response = res.text;
           this.allWines.forEach((wine) => {
             this.response += ('/' + JSON.stringify(wine));
             /*this.response += wine.id_wine;
             this.response += wine.name;*/
-            if(wine.id_wine == res)
+            if(wine.id_wine == res.text)
             {
               this.name = wine.name;
               this.year = wine.year;
