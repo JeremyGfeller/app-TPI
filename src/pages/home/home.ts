@@ -32,7 +32,8 @@ export class HomePage {
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
-      storage.get('allWines').then((data) => {
+    this.movements = [];  
+    storage.get('allWines').then((data) => {
         this.allWines = data;
       })
 
@@ -50,7 +51,8 @@ export class HomePage {
       if(data == 'ok')
       {
         this.toastCtrl.create({
-          message: 'syncro ok'
+          message: 'syncro ok',
+          duration: 3000
         }).present();
       }
     })
