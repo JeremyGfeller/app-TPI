@@ -41,39 +41,26 @@ export class HomePage {
       })
   }
 
-  sync() {
-    //this.platform.ready().then(() => {
-      
-      let postData = new FormData()
-      postData.append('movements', JSON.stringify(this.movements))
-
-      this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
-      this.data.subscribe( data => {
-        //this.response = data
-        if(data == 'ok')
-        {
-          this.toastCtrl.create({
-            message: 'syncro ok'
-          }).present();
-        }
-      })
-      
-      /*postData.append('idWine', id_wine)
-      postData.append('quantity', Quantity)
-      postData.append('pseudo', first_name)
-      this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
-      this.data.subscribe( data => {
-        //this.response = data
-        this.response = "Les bouteilles ont été retirées !";
-      })*/
-
-      this.resultSync = this.httpClient.get(this.url + "stock.php");
-      this.resultSync
-      .subscribe(data => {
-        this.allWines = data;
-        this.storage.set('allWines', this.allWines);
-      })
-    //})
+  sync() 
+  {
+    let postData = new FormData()
+    postData.append('movements', JSON.stringify(this.movements))
+    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
+    this.data.subscribe( data => {
+      //this.response = data
+      if(data == 'ok')
+      {
+        this.toastCtrl.create({
+          message: 'syncro ok'
+        }).present();
+      }
+    })
+    this.resultSync = this.httpClient.get(this.url + "stock.php");
+    this.resultSync
+    .subscribe(data => {
+      this.allWines = data;
+      this.storage.set('allWines', this.allWines);
+    })
   }
 
   in(id_wine, Quantity, fournisseur, first_name)
@@ -108,11 +95,7 @@ export class HomePage {
       /* Scan the QR-Code and the data appear */
       this.bcs.scan(options)
       .then(res => {
-        this.response = res.text;
           this.allWines.forEach((wine) => {
-            this.response += ('/' + JSON.stringify(wine));
-            /*this.response += wine.id_wine;
-            this.response += wine.name;*/
             if(wine.id_wine == res.text)
             {
               this.name = wine.name;
@@ -125,19 +108,6 @@ export class HomePage {
             message: err.message
           }).present();
       })
-    })
-  }
-
-  scanQRtest()
-  {
-    let res = 1;
-      this.allWines.forEach((wine) => {
-        console.log(wine);
-        if(wine.id_wine == res)
-        {
-          this.name = wine.name;
-          this.year = wine.year;
-        }
     })
   }
 }
