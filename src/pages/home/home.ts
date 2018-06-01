@@ -49,7 +49,7 @@ export class HomePage {
   {
     let postData = new FormData()
     postData.append('movements', JSON.stringify(this.movements))
-    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/out.php', postData)
+    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/inout.php', postData)
     this.data.subscribe( data => {
       if(data == 'ok')
       {
@@ -68,23 +68,15 @@ export class HomePage {
     })
   }
 
-  in(id_wine, Quantity, fournisseur, first_name)
+  movement(id_wine, movement_type, Quantity, fournisseur, login)
   {
-    let postData = new FormData()
-    postData.append('idWine', id_wine)
-    postData.append('quantity', Quantity)
-    postData.append('provider', fournisseur)
-    postData.append('pseudo', first_name)
-    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/in.php', postData)
-    this.data.subscribe( data => {
-      //this.responseTxt = data
-      this.response = "Les bouteilles ont été ajoutées !";
-    })
+    this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
+    this.storage.set('movements', this.movements); 
   }
 
-  out(id_wine, Quantity, login)
+  movementEmu(id_wine, movement_type, Quantity, fournisseur, login)
   {
-    this.movements.push({'id_wine': id_wine, 'movement_out': Quantity, 'login': login});
+    this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
     this.storage.set('movements', this.movements); 
   }
 
@@ -114,6 +106,19 @@ export class HomePage {
             message: err.message
           }).present();
       })
+    })
+  }
+  scanEmu()
+  {
+    let res = 1
+    this.allWines.forEach((wine) => 
+    {
+      if(wine.id_wine == res)
+      {
+        this.id_wine = wine.id_wine;
+        this.name = wine.name;
+        this.year = wine.year;
+      }
     })
   }  
 }

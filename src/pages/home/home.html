@@ -26,9 +26,16 @@
       </ion-item>
     </ion-list>
 
-    <button ion-button full (click) = "in(id_wine, Quantity, fournisseur, first_name)">Entrée</button>
-    <button ion-button full (click) = "out(id_wine, Quantity, login)">Sortie</button>
-    
+    <button ion-button full (click) = "movement(id_wine, 1, Quantity, fournisseur, login)">Entrée</button>
+    <button ion-button full (click) = "movement(id_wine, -1, Quantity, login)">Sortie</button>
+    <button ion-button full (click) = "movement(id_wine, 0, Quantity, login)">Inventaire</button>
+
+
+    <button ion-button full (click) = "movementEmu(1, 1, Quantity, fournisseur, login)">Entrée EMU</button>
+    <button ion-button full (click) = "movementEmu(1, -1, Quantity, fournisseur, login)">Sortie EMU</button>
+    <button ion-button full (click) = "movementEmu(1, 0, Quantity, fournisseur, login)">Inventaire EMU</button>
+    <button ion-button full (click) = "scanEmu()">scan emu</button>
+
     {{response}}
     <br>
     <ion-list>
