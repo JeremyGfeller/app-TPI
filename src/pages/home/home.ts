@@ -61,6 +61,7 @@ export class HomePage {
         this.storage.get('movements').then((data) => {
           this.storage.remove('movements');
         })
+        //window.location.reload();
       }
     })
     this.resultSync = this.httpClient.get(this.url + "stock.php");
@@ -69,7 +70,6 @@ export class HomePage {
       this.allWines = data;
       this.storage.set('allWines', this.allWines);
     })
-    window.location.reload();
   }
 
   movement(id_wine, movement_type, Quantity, fournisseur, login)
@@ -101,8 +101,7 @@ export class HomePage {
           this.allWines.forEach((wine) => {
             if(wine.id_vintage == res.text)
             {
-              this.id_vintage = wine.id_vintage;
-              this.id_wine = wine.id_wine;
+              this.id_wine = wine.id_vintage;
               this.name = wine.name;
               this.year = wine.year;
             }
@@ -117,13 +116,13 @@ export class HomePage {
   }
   scanEmu()
   {
-    let res = 15
+    let res = 4
     this.allWines.forEach((wine) => 
     {
+      console.log(wine);
       if(wine.id_vintage == res)
       {
-        this.id_vintage = wine.id_vintage;
-        this.id_wine = wine.id_wine;
+        this.id_wine = wine.id_vintage;
         this.name = wine.name;
         this.year = wine.year;
       }

@@ -63,6 +63,7 @@ export class AboutPage {
         this.storage.get('update').then((data) => {
           this.storage.remove('update');
         })
+        //window.location.reload();
       }
     })
     this.resultSync = this.httpClient.get(this.url + "stock.php");
@@ -71,7 +72,6 @@ export class AboutPage {
       this.allWines = data;
       this.storage.set('allWines', this.allWines);
     })
-    window.location.reload();
   }
 
   scanBarcode()
