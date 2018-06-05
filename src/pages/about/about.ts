@@ -72,6 +72,7 @@ export class AboutPage {
           duration: 3000
         }).present();
         this.storage.get('update').then((data) => {
+          this.storage.remove('update')
           this.update = [];
         })
       }

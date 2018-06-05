@@ -58,7 +58,8 @@ export class HomePage {
   del()
   {
     this.storage.get('movements').then((data) => {
-      this.movements = [];
+      this.storage.remove('movements');
+      this.movements = []
     })
   }
 
@@ -75,7 +76,8 @@ export class HomePage {
           duration: 3000
         }).present();
         this.storage.get('movements').then((data) => {
-          this.movements = [];
+          this.storage.remove('movements');
+          this.movements = []
         })
       }
     })
