@@ -33,7 +33,6 @@ export class HomePage {
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
-    storage.remove('movements');
     storage.get('allWines').then((data) => {
         this.allWines = data;
       })
