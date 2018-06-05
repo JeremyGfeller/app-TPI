@@ -24,6 +24,7 @@ export class HomePage {
 
   result: BarcodeScanResult;
   id_wine: number;
+  id_vintage: number;
   name: Text;
   quantity: number;
   year: number;
@@ -57,7 +58,9 @@ export class HomePage {
           message: 'syncro ok',
           duration: 3000
         }).present();
-        this.storage.remove('movements');
+        this.storage.get('movements').then((data) => {
+          this.storage.remove('movements');
+        })
       }
     })
     this.resultSync = this.httpClient.get(this.url + "stock.php");
@@ -66,18 +69,21 @@ export class HomePage {
       this.allWines = data;
       this.storage.set('allWines', this.allWines);
     })
+    window.location.reload();
   }
 
   movement(id_wine, movement_type, Quantity, fournisseur, login)
   {
     this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
     this.storage.set('movements', this.movements); 
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   movementEmu(id_wine, movement_type, Quantity, fournisseur, login)
   {
     this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
     this.storage.set('movements', this.movements); 
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   scanQR()
@@ -93,8 +99,9 @@ export class HomePage {
       this.bcs.scan(options)
       .then(res => {
           this.allWines.forEach((wine) => {
-            if(wine.id_wine == res.text)
+            if(wine.id_vintage == res.text)
             {
+              this.id_vintage = wine.id_vintage;
               this.id_wine = wine.id_wine;
               this.name = wine.name;
               this.year = wine.year;
@@ -110,11 +117,12 @@ export class HomePage {
   }
   scanEmu()
   {
-    let res = 1
+    let res = 15
     this.allWines.forEach((wine) => 
     {
-      if(wine.id_wine == res)
+      if(wine.id_vintage == res)
       {
+        this.id_vintage = wine.id_vintage;
         this.id_wine = wine.id_wine;
         this.name = wine.name;
         this.year = wine.year;

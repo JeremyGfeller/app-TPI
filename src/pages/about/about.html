@@ -20,7 +20,7 @@
       </ion-item>
     </ion-list>
         
-    <button ion-button full (click) = "updateTable(id_wine, newQuantity)">Appliquer</button>
+    <button ion-button full (click) = "updateTable(id_wine, newQuantity, 0)">Appliquer</button>
     <button ion-button full (click) = "sync()">Synchroniser</button>
     <ion-list>
       <ion-item *ngFor="let allWine of allWines">

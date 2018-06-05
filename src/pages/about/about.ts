@@ -28,7 +28,6 @@ export class AboutPage {
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, public network: NetworkEngineProvider) {
-    this.storage.remove('update');
     storage.get('allWines').then((data) => {
       this.allWines = data;
     })
@@ -42,9 +41,10 @@ export class AboutPage {
     })
   }
   
-  updateTable(id, newQuantity) {
-    this.update.push({'id_wine': id, 'newQuantity': newQuantity});
+  updateTable(id, newQuantity, movement_type) {
+    this.update.push({'id_wine': id, 'newQuantity': newQuantity, 'movement_type': movement_type});
     this.storage.set('update', this.update); 
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   sync()
@@ -60,6 +60,9 @@ export class AboutPage {
           message: 'syncro ok',
           duration: 3000
         }).present();
+        this.storage.get('update').then((data) => {
+          this.storage.remove('update');
+        })
       }
     })
     this.resultSync = this.httpClient.get(this.url + "stock.php");
@@ -68,6 +71,7 @@ export class AboutPage {
       this.allWines = data;
       this.storage.set('allWines', this.allWines);
     })
+    window.location.reload();
   }
 
   scanBarcode()
@@ -82,9 +86,9 @@ export class AboutPage {
     this.bcs.scan(options)
     .then(res => {
         this.allWines.forEach((wine) => {
-          if(wine.id_wine == res.text)
+          if(wine.id_vintage == res.text)
           {
-            this.id_wine = wine.id_wine;
+            this.id_wine = wine.id_vintage;
             this.name = wine.name;
             this.year = wine.year;
             this.quantity = wine.quantity;
