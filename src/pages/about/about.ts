@@ -42,9 +42,20 @@ export class AboutPage {
   }
   
   updateTable(id, newQuantity, movement_type) {
-    this.update.push({'id_wine': id, 'newQuantity': newQuantity, 'movement_type': movement_type});
-    this.storage.set('update', this.update); 
-    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    
+    if(id == undefined || newQuantity == undefined)
+    {
+      this.toastCtrl.create({
+        message: 'Veuillez scanner un QR Code ou entrez une quantité',
+        duration: 7000
+      }).present();
+    }
+    else
+    {
+      this.update.push({'id_wine': id, 'newQuantity': newQuantity, 'movement_type': movement_type});
+      this.storage.set('update', this.update); 
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    }
   }
 
   sync()
