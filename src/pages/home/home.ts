@@ -15,12 +15,16 @@ export class HomePage {
 
   public allWines = [];
   public movements = [];
+  public users = [];
   resultSync : Observable<any>;
   response: any;
   response2: string [] = [];
   Quantity: number;
   fournisseur: string;
   login: string;
+
+  id_user : number;
+  loginUser : string;
 
   result: BarcodeScanResult;
   id_wine: number;
@@ -29,11 +33,12 @@ export class HomePage {
   quantity: number;
   year: number;
   resultScan: Observable<any>;
+  resultUsers: Observable<any>;
   data: Observable<any>;
   url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
-    storage.get('allWines').then((data) => {
+      storage.get('allWines').then((data) => {
         this.allWines = data;
       })
 
@@ -44,6 +49,17 @@ export class HomePage {
           this.movements = [];
         }
       })
+
+      storage.get('users').then((data) => {
+        this.users = data;
+      })
+  }
+
+  del()
+  {
+    this.storage.get('movements').then((data) => {
+      this.movements = [];
+    })
   }
 
   sync() 
@@ -68,6 +84,13 @@ export class HomePage {
     .subscribe(data => {
       this.allWines = data;
       this.storage.set('allWines', this.allWines);
+    })
+
+    this.resultUsers = this.httpClient.get(this.url + "users.php");
+    this.resultUsers
+    .subscribe(data => {
+      this.users = data;
+      this.storage.set('users', this.users);
     })
   }
 

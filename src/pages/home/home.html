@@ -25,29 +25,39 @@
         <ion-input type="text" required [(ngModel)] = "login"></ion-input>
       </ion-item>
     </ion-list>
+    
+    <ion-list>
+        <p>Liste des login</p>
+        <ion-item *ngFor="let user of users">
+          login : {{user.login}}
+        </ion-item>
+      </ion-list>
 
     <button ion-button full (click) = "movement(id_wine, 1, Quantity, fournisseur, login)">Entrée</button>
     <button ion-button full (click) = "movement(id_wine, -1, Quantity, fournisseur, login)">Sortie</button>
-    <button ion-button full (click) = "movement(id_wine, 0, Quantity, fournisseur, login)">Inventaire</button>
-
+    <button ion-button full (click) = "movement(id_wine, 0, Quantity, fournisseur, login)">Inventaire</button><br>
+    <button ion-button full (click) = "sync()">Synchroniser</button>
 
     <!--button ion-button full (click) = "movementEmu(1, 1, Quantity, fournisseur, login)">Entrée EMU</button>
     <button ion-button full (click) = "movementEmu(1, -1, Quantity, fournisseur, login)">Sortie EMU</button>
     <button ion-button full (click) = "movementEmu(1, 0, Quantity, fournisseur, login)">Inventaire EMU</button>
     <button ion-button full (click) = "scanEmu()">scan emu</button-->
 
-    {{response}}
+    
+    <button ion-button full (click) = "del()">Ne pas Synchroniser</button>
+
     <br>
     <ion-list>
+      <p>Liste des mouvements en attente</p>
       <ion-item *ngFor="let movement of movements">
-        {{movement.id_wine}}{{movement.movement_type}}{{movement.login}}
+        Mouvement effectué par : {{movement.login}} pour le vin {{movement.name}} de {{movement.year}}
       </ion-item>
     </ion-list><br>
 
-    <button ion-button full (click) = "sync()">Synchroniser</button><br>
     <ion-list>
+      <p>Liste des vins en mémoire</p>
       <ion-item *ngFor="let allWine of allWines">
-        {{allWine.id_vintage}}{{allWine.name}}
+        {{allWine.name}} de {{allWine.year}}
       </ion-item>
     </ion-list>
 </ion-content>

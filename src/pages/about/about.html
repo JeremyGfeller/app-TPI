@@ -21,12 +21,20 @@
     </ion-list>
         
     <button ion-button full (click) = "updateTable(id_wine, newQuantity, 0)">Appliquer</button>
-    <button ion-button full (click) = "sync()">Synchroniser</button>
+    <button ion-button full (click) = "sync()">Synchroniser</button><br>
+
     <ion-list>
+      <p>Inventaire en attente</p>
+      <ion-item *ngFor="let movement of movements">
+        Nouvel inventaire de {{movement.newQuantity}} pour un {{movement.name}} de {{movement.year}}
+      </ion-item>
+    </ion-list><br>
+
+    <ion-list>
+      <p>Liste des vins en mémoire</p>
       <ion-item *ngFor="let allWine of allWines">
-        {{allWine.id_vintage}} {{allWine.name}}
+        {{allWine.name}} de {{allWine.year}}
       </ion-item>
     </ion-list>
 
-    <br>{{responseTxt}}
 </ion-content>
