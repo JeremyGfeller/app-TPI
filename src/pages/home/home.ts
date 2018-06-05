@@ -59,9 +59,8 @@ export class HomePage {
           duration: 3000
         }).present();
         this.storage.get('movements').then((data) => {
-          this.storage.remove('movements');
+          this.movements = [];
         })
-        //window.location.reload();
       }
     })
     this.resultSync = this.httpClient.get(this.url + "stock.php");
@@ -79,12 +78,12 @@ export class HomePage {
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
-  movementEmu(id_wine, movement_type, Quantity, fournisseur, login)
+  /*movementEmu(id_wine, movement_type, Quantity, fournisseur, login)
   {
     this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
     this.storage.set('movements', this.movements); 
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
-  }
+  }*/
 
   scanQR()
   {
@@ -114,7 +113,7 @@ export class HomePage {
       })
     })
   }
-  scanEmu()
+  /*scanEmu()
   {
     let res = 4
     this.allWines.forEach((wine) => 
@@ -127,5 +126,5 @@ export class HomePage {
         this.year = wine.year;
       }
     })
-  }  
+  }  */
 }

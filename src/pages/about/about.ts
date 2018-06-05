@@ -61,9 +61,8 @@ export class AboutPage {
           duration: 3000
         }).present();
         this.storage.get('update').then((data) => {
-          this.storage.remove('update');
+          this.update = [];
         })
-        //window.location.reload();
       }
     })
     this.resultSync = this.httpClient.get(this.url + "stock.php");
