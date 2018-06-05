@@ -25,8 +25,8 @@
 
     <ion-list>
       <p>Inventaire en attente</p>
-      <ion-item *ngFor="let movement of movements">
-        Nouvel inventaire de {{movement.newQuantity}} pour un {{movement.name}} de {{movement.year}}
+      <ion-item *ngFor="let update of update">
+        Nouvel inventaire de {{update.newQuantity}}
       </ion-item>
     </ion-list><br>
 

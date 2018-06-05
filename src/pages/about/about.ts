@@ -36,13 +36,12 @@ export class AboutPage {
       this.update = data;
       if(data == null)
       {
-        this.update = [] = [];
+        this.update = [];
       }
     })
   }
   
   updateTable(id, newQuantity, movement_type) {
-    
     if(id == undefined || newQuantity == undefined)
     {
       this.toastCtrl.create({
