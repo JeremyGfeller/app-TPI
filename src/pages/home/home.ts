@@ -22,10 +22,8 @@ export class HomePage {
   Quantity: number;
   fournisseur: string;
   login: string;
-
   id_user : number;
   loginUser : string;
-
   result: BarcodeScanResult;
   id_wine: number;
   id_vintage: number;
@@ -81,6 +79,7 @@ export class HomePage {
         })
       }
     })
+
     this.resultSync = this.httpClient.get(this.url + "stock.php");
     this.resultSync
     .subscribe(data => {
@@ -113,24 +112,6 @@ export class HomePage {
     }
   }
 
-  /*movementEmu(id_wine, movement_type, Quantity, fournisseur, login)
-  {
-    console.log(id_wine, Quantity, login);
-    if(id_wine == undefined || Quantity == undefined || login == undefined)
-    {
-      this.toastCtrl.create({
-        message: 'Veuillez scanner un QR Code, entrez une quantité ou entrez votre login',
-        duration: 7000
-      }).present();
-    }
-    else
-    {
-      this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
-      this.storage.set('movements', this.movements); 
-      this.navCtrl.setRoot(this.navCtrl.getActive().component);
-    }
-  }*/
-
   scanQR()
   {
     this.platform.ready().then(() => {
@@ -138,7 +119,6 @@ export class HomePage {
         prompt: 'Pointez votre caméra vers un code barre',
         torchOn: false
       };
-
       // Push to master : git push ionic master
       /* Scan the QR-Code and the data appear */
       this.bcs.scan(options)
@@ -159,18 +139,4 @@ export class HomePage {
       })
     })
   }
-  /*scanEmu()
-  {
-    let res = 4
-    this.allWines.forEach((wine) => 
-    {
-      console.log(wine);
-      if(wine.id_vintage == res)
-      {
-        this.id_wine = wine.id_vintage;
-        this.name = wine.name;
-        this.year = wine.year;
-      }
-    })
-  }  */
 }

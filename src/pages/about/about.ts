@@ -91,7 +91,6 @@ export class AboutPage {
       prompt: 'Pointez votre caméra vers un code barre',
       torchOn: false
     };
-
     // Push to master : git push ionic master
     /* Scan the QR-Code and the data appear */
     this.bcs.scan(options)
