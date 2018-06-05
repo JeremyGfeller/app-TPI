@@ -14,7 +14,7 @@
       <p>Année: {{year}}</p>
       <ion-item>
         <ion-label>Nombre de bouteilles:</ion-label>
-        <ion-input type="text" [(ngModel)] = "Quantity"></ion-input>
+        <ion-input type="text" required [(ngModel)] = "Quantity"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Fournisseurs:</ion-label>
@@ -22,7 +22,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Login:</ion-label>
-        <ion-input type="text" [(ngModel)] = "login"></ion-input>
+        <ion-input type="text" required [(ngModel)] = "login"></ion-input>
       </ion-item>
     </ion-list>
 
@@ -40,7 +40,7 @@
     <br>
     <ion-list>
       <ion-item *ngFor="let movement of movements">
-        {{movement.id_wine}}{{movement.movement_out}}{{movement.login}}
+        {{movement.id_wine}}{{movement.movement_type}}{{movement.login}}
       </ion-item>
     </ion-list><br>
 

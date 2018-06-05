@@ -73,16 +73,37 @@ export class HomePage {
 
   movement(id_wine, movement_type, Quantity, fournisseur, login)
   {
-    this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
-    this.storage.set('movements', this.movements); 
-    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    if(id_wine == undefined || Quantity == undefined || login == undefined)
+    {
+      this.toastCtrl.create({
+        message: 'Veuillez scanner un QR Code, entrez une quantité ou entrez votre login',
+        duration: 7000
+      }).present();
+    }
+    else
+    {
+      this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
+      this.storage.set('movements', this.movements); 
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    }
   }
 
   /*movementEmu(id_wine, movement_type, Quantity, fournisseur, login)
   {
-    this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
-    this.storage.set('movements', this.movements); 
-    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    console.log(id_wine, Quantity, login);
+    if(id_wine == undefined || Quantity == undefined || login == undefined)
+    {
+      this.toastCtrl.create({
+        message: 'Veuillez scanner un QR Code, entrez une quantité ou entrez votre login',
+        duration: 7000
+      }).present();
+    }
+    else
+    {
+      this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
+      this.storage.set('movements', this.movements); 
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    }
   }*/
 
   scanQR()
