@@ -7,33 +7,12 @@
 </ion-header>
 
 <ion-content padding>
-    <button ion-button full (click)="scanBarcode()">Scanner le QR Code</button>
-
-    <p>Nom du vin: {{name}}</p> 
-    <p>Année: {{year}}</p>
-    <p>Stock: {{quantity}} bouteilles</p>
-
-    <ion-list>
-      <ion-item>
-        <ion-label>Nouveau stock:</ion-label>
-        <ion-input type="text" [(ngModel)] = "newQuantity"></ion-input>
-      </ion-item>
-    </ion-list>
-        
-    <button ion-button full (click) = "updateTable(id_wine, newQuantity, 0)">Appliquer</button>
     <button ion-button full (click) = "sync()">Synchroniser</button><br>
-
-    <ion-list>
-      <p>Inventaire en attente</p>
-      <ion-item *ngFor="let update of update">
-        Nouvel inventaire de {{update.newQuantity}}
-      </ion-item>
-    </ion-list><br>
 
     <ion-list>
       <p>Liste des vins en mémoire</p>
       <ion-item *ngFor="let allWine of allWines">
-        {{allWine.name}} de {{allWine.year}}
+        {{allWine.name}} de {{allWine.year}} : {{allWine.quantity}} bouteilles
       </ion-item>
     </ion-list>
 
