@@ -25,7 +25,7 @@ export class AboutPage {
   quantity: number;
   year: number;
   resultScan: Observable<any>;
-  url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
+  url: string = "http://cercledyverdon.ch/cave/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, public network: NetworkEngineProvider) {
     storage.get('allWines').then((data) => {
@@ -61,7 +61,7 @@ export class AboutPage {
   {
     let postDataOut = new FormData()
     postDataOut.append('update', JSON.stringify(this.update))
-    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/update.php', postDataOut)
+    this.data = this.httpClient.post(this.url + "update.php", postDataOut)
     this.data.subscribe( data => {
       if(data == 'ok')
       {

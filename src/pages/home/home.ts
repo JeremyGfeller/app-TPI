@@ -33,7 +33,7 @@ export class HomePage {
   resultScan: Observable<any>;
   resultUsers: Observable<any>;
   data: Observable<any>;
-  url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
+  url: string = "http://cercledyverdon.ch/cave/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
       storage.get('allWines').then((data) => {
@@ -65,7 +65,7 @@ export class HomePage {
   {
     let postData = new FormData()
     postData.append('movements', JSON.stringify(this.movements))
-    this.data = this.httpClient.post('https://cpnvproj1.ngrok.io/TPI/site/inout.php', postData)
+    this.data = this.httpClient.post(this.url + "inout.php", postData)
     this.data.subscribe( data => {
       if(data == 'ok')
       {
