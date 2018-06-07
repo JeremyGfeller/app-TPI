@@ -51,6 +51,8 @@ export class HomePage {
 
       storage.get('users').then((data) => {
         this.users = data;
+        this.id_user = data[0].id_users;
+        this.loginUser = data[0].login;
       })
   }
 

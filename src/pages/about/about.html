@@ -10,7 +10,6 @@
     <button ion-button full (click) = "sync()">Synchroniser</button><br>
 
     <ion-list>
-      <p>Liste des vins en mémoire</p>
       <ion-item *ngFor="let allWine of allWines">
         {{allWine.name}} de {{allWine.year}} : {{allWine.quantity}} bouteilles
       </ion-item>
