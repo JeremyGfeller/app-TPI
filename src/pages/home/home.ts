@@ -104,7 +104,7 @@ export class HomePage {
     }
     else
     {
-      this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login});
+      this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login[0]});
       this.storage.set('movements', this.movements); 
       this.navCtrl.setRoot(this.navCtrl.getActive().component);
     }
