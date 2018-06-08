@@ -14,8 +14,9 @@ import { Storage } from '@ionic/storage';
 export class HomePage {
 
   public allWines = [];
-  public movements = [];
   public users = [];
+  public movements = [];
+  public currentUser = [];
   resultSync : Observable<any>;
   response: any;
   response2: string [] = [];
@@ -31,7 +32,6 @@ export class HomePage {
   quantity: number;
   year: number;
   resultScan: Observable<any>;
-  resultUsers: Observable<any>;
   data: Observable<any>;
   //url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
   url : string = "http://cercledyverdon.ch/cave/";
@@ -49,10 +49,8 @@ export class HomePage {
         }
       })
 
-      storage.get('users').then((data) => {
-        this.users = data;
-        this.id_user = data[0].id_users;
-        this.loginUser = data[0].login;
+      this.storage.get('currentUser').then((data) => {
+        this.loginUser = data;
       })
   }
 
@@ -90,11 +88,8 @@ export class HomePage {
       this.storage.set('allWines', this.allWines);
     })
 
-    this.resultUsers = this.httpClient.get(this.url + "users.php");
-    this.resultUsers
-    .subscribe(data => {
-      this.users = data;
-      this.storage.set('users', this.users);
+    this.storage.get('currentUser').then((data) => {
+      this.loginUser = data;
     })
   }
 

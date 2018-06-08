@@ -1,27 +1,21 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      Cercle d'Yverdon
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
+  <ion-list radio-group [(ngModel)]="login">
+    <p>Logins disponibles</p>
+    <ion-item *ngFor="let user of users">
+      <ion-label>{{user.login}}</ion-label>
+      <ion-radio value = "{{user.login}}"></ion-radio>
     </ion-item>
   </ion-list>
   
+  <button ion-button full (click) = "app(login)">Appliquer</button>
   <button ion-button full (click) = "sync()">Synchroniser</button>
 
-  <ion-list>
-    <ion-item *ngFor="let allWine of allWines">
-      {{allWine.id_vintage}}{{allWine.name}}
-    </ion-item>
-  </ion-list>
 </ion-content>
-{{responseTxt}}
-<!--id_vintage""id_wine""name":"provider""year""qr_code""quantity""price""date-->
