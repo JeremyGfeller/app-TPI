@@ -37,6 +37,7 @@ export class ContactPage {
   {
     this.currentUser = ([loginUser]);
     this.storage.set('currentUser', this.currentUser); 
+    location.reload();
   }
 
   sync()
