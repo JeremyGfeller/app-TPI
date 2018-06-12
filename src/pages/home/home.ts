@@ -28,13 +28,15 @@ export class HomePage {
   result: BarcodeScanResult;
   id_wine: number;
   id_vintage: number;
-  name: Text;
   quantity: number;
+  name: Text;
   year: number;
+  resName: Text;
+  resYear: number;
   resultScan: Observable<any>;
   data: Observable<any>;
   //url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
-  url : string = "http://cercledyverdon.ch/cave/";
+  url : string = "http://cercledyverdon.ch/cave/app/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, private alertCtrl: AlertController) {
       storage.get('allWines').then((data) => {
@@ -104,7 +106,15 @@ export class HomePage {
     }
     else
     {
-      this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login[0]});
+      this.allWines.forEach((wine) => 
+      {
+        if(wine.id_vintage == id_wine)
+        {
+          this.resName = wine.name;
+          this.resYear = wine.year;
+          this.movements.push({'id_wine': id_wine, 'movement_type': movement_type, 'nb_bottle': Quantity, 'fournisseur': fournisseur, 'login': login[0], 'name': this.resName, 'year': this.resYear});
+        }
+      })
       this.storage.set('movements', this.movements); 
       this.navCtrl.setRoot(this.navCtrl.getActive().component);
     }

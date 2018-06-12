@@ -17,7 +17,7 @@ export class ContactPage {
   id_user : number;
   loginUser : string;
   //url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
-  url : string = "http://cercledyverdon.ch/cave/";
+  url : string = "http://cercledyverdon.ch/cave/app/";
 
   constructor(public navCtrl: NavController, private storage: Storage, private httpClient: HttpClient, public platform: Platform) {
 

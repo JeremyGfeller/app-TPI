@@ -26,7 +26,7 @@ export class AboutPage {
   year: number;
   resultScan: Observable<any>;
   //url: string = "https://cpnvproj1.ngrok.io/TPI/site/";
-  url : string = "http://cercledyverdon.ch/cave/";
+  url : string = "http://cercledyverdon.ch/cave/app/";
 
   constructor(public navCtrl: NavController, private storage: Storage, public platform: Platform, public toastCtrl: ToastController, private bcs: BarcodeScanner, public httpClient: HttpClient, public network: NetworkEngineProvider) {
     storage.get('allWines').then((data) => {
