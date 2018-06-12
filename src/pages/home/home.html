@@ -33,7 +33,7 @@
     <ion-list>
       <p>Liste des mouvements en attente</p>
       <ion-item *ngFor="let movement of movements">
-        {{movement.id_wine}}{{movement.nb_bottle}}{{movement.movement_type}}
+        {{movement.name}} de {{movement.year}}, {{movement.nb_bottle}} bouteille(s)
       </ion-item>
     </ion-list>
 
