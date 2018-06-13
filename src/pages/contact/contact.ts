@@ -37,16 +37,10 @@ export class ContactPage {
   {
     this.currentUser = ([loginUser]);
     this.storage.set('currentUser', this.currentUser); 
-    location.reload();
   }
 
   sync()
   {
-    this.resultUsers = this.httpClient.get(this.url + "users.php");
-    this.resultUsers
-    .subscribe(data => {
-      this.users = data;
-      this.storage.set('users', this.users);
-    })
+    location.reload();
   }
 }
