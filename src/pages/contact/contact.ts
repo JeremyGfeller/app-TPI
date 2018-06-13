@@ -42,6 +42,11 @@ export class ContactPage {
 
   sync()
   {
-    location.reload();
+    this.resultUsers = this.httpClient.get(this.url + "users.php");
+    this.resultUsers
+    .subscribe(data => {
+      this.users = data;
+      this.storage.set('users', this.users);
+    })
   }
 }
